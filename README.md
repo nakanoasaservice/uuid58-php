@@ -160,7 +160,9 @@ file here and run the tests when the specification changes.
 ### Releasing
 
 Tag a tested commit on `main` with `vX.Y.Z` and push the tag. The GitHub
-webhook tells Packagist to import the version as `nakanoaas/uuid58`.
+webhook tells Packagist to import the version as `nakanoaas/uuid58`. The
+GitHub Release workflow also creates a release with generated notes. Tags
+with a prerelease suffix (for example `v0.2.0-rc.1`) create a prerelease.
 Do not move existing release tags.
 
 ## License
