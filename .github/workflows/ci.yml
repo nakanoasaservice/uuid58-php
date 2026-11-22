@@ -1,0 +1,68 @@
+name: CI (PHP)
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 0 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  php:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # The minimum version in composer.json, and the latest release.
+        php-version: ["8.1", "8.5"]
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@2.40.0
+        with:
+          php-version: ${{ matrix.php-version }}
+          # The library needs no extensions; disable the optional ones it
+          # could otherwise come to rely on by accident.
+          extensions: :gmp, :bcmath
+          coverage: none
+          tools: composer:v2
+
+      - name: Validate composer.json
+        run: composer validate --strict
+
+      - name: Install dependencies
+        run: composer update --no-interaction --no-progress
+
+      - name: Static analysis
+        run: vendor/bin/phpstan analyse --no-progress
+
+      - name: Run tests (including spec/vectors.json conformance)
+        run: vendor/bin/phpunit
+
+  vectors:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - name: Compare with upstream test vectors
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/nakanoasaservice/uuid58/main/spec/vectors.json -o upstream.json
+          cmp upstream.json tests/vectors.json
+
+  actions-lock:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - run: gh extension install github/gh-actions-lock
+      - run: gh actions-lock --verify

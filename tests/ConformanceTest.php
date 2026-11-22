@@ -26,8 +26,8 @@ final class ConformanceTest extends TestCase
     private static function vectors(): array
     {
         if (self::$vectors === null) {
-            $json = file_get_contents(__DIR__ . '/../../spec/vectors.json');
-            self::assertIsString($json, 'cannot read ../spec/vectors.json');
+            $json = file_get_contents(__DIR__ . '/vectors.json');
+            self::assertIsString($json, 'cannot read tests/vectors.json');
             /** @var array<string, mixed> $decoded */
             $decoded = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
             self::$vectors = $decoded;
