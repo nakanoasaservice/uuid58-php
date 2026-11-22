@@ -1,6 +1,6 @@
 # uuid58 for PHP
 
-[![CI](https://github.com/nakanoasaservice/uuid58/actions/workflows/ci-php.yml/badge.svg)](https://github.com/nakanoasaservice/uuid58/actions/workflows/ci-php.yml)
+[![CI](https://github.com/nakanoasaservice/uuid58-php/actions/workflows/ci.yml/badge.svg)](https://github.com/nakanoasaservice/uuid58-php/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/nakanoasaservice/uuid58/blob/main/LICENSE)
 
 Shorten UUIDs to 22-character Base58 strings, and back, in PHP. Works with
@@ -144,10 +144,8 @@ and the reverse.
 
 ## Development
 
-This repository distributes the PHP implementation from
-[nakanoasaservice/uuid58](https://github.com/nakanoasaservice/uuid58/tree/main/php).
-Please submit issues and pull requests there. Clone that repository and run
-the following commands from its `php/` directory.
+Development and releases take place in this repository. The shared specification
+and other implementations live in [uuid58](https://github.com/nakanoasaservice/uuid58).
 
 ```bash
 composer install
@@ -155,8 +153,15 @@ composer test        # PHPUnit, including spec/vectors.json conformance
 composer analyse     # PHPStan, level max
 ```
 
-The conformance tests read `../spec/vectors.json`, so run them from a
-checkout of the repository.
+`tests/vectors.json` is a copy of the upstream `spec/vectors.json`. CI checks
+that they match on every push, pull request, and weekly. Copy the upstream
+file here and run the tests when the specification changes.
+
+### Releasing
+
+Tag a tested commit on `main` with `vX.Y.Z` and push the tag. The GitHub
+webhook tells Packagist to import the version as `nakanoaas/uuid58`.
+Do not move existing release tags.
 
 ## License
 
