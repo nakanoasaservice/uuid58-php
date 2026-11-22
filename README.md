@@ -30,10 +30,10 @@ f4b247fd-1f87-45d4-aa06-1c6fc0a8dfaf  ⇄  XDY9dmBbcMBXqcRvYw8xJ2
 ## Install
 
 ```bash
-composer require nakanoasaservice/uuid58
+composer require nakanoaas/uuid58
 ```
 
-Available on [Packagist](https://packagist.org/packages/nakanoasaservice/uuid58).
+Available on [Packagist](https://packagist.org/packages/nakanoaas/uuid58).
 
 ## Usage
 
