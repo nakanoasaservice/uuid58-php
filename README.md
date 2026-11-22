@@ -33,8 +33,7 @@ f4b247fd-1f87-45d4-aa06-1c6fc0a8dfaf  ⇄  XDY9dmBbcMBXqcRvYw8xJ2
 composer require nakanoasaservice/uuid58
 ```
 
-The package is not released on Packagist yet; this command works once the
-first version is published.
+Available on [Packagist](https://packagist.org/packages/nakanoasaservice/uuid58).
 
 ## Usage
 
@@ -144,6 +143,11 @@ in CI. A string encoded here decodes to the same UUID with every other
 and the reverse.
 
 ## Development
+
+This repository distributes the PHP implementation from
+[nakanoasaservice/uuid58](https://github.com/nakanoasaservice/uuid58/tree/main/php).
+Please submit issues and pull requests there. Clone that repository and run
+the following commands from its `php/` directory.
 
 ```bash
 composer install
