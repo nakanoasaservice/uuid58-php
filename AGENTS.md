@@ -10,5 +10,6 @@ and `vendor/bin/phpunit`. CI covers PHP 8.1 and 8.5 without GMP or BCMath.
 CI checks for drift, including weekly. Update the fixture when upstream changes.
 
 After changing any Actions `uses:`, run `gh actions-lock` and commit the lockfile.
-Releases use `vX.Y.Z` tags and the Packagist GitHub webhook. Do not push release
+Releases use `vX.Y.Z` tags: the Packagist webhook imports the package and
+`.github/workflows/release.yml` creates a GitHub Release with generated notes. Do not push release
 tags unless asked, and never move published tags.
